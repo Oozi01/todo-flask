@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<br>
+<div class="cardtop" style="width: 42rem;">
+    <div class="card-body">
+    <form action="/add" method="POST">
+        <div>
+            <label for="title" class="title">ToDo List</label>
+            <br>
+            <input type="text" name="title" placeholder="Enter Activity..." class="input">
+            <button type="submit" class="btn btn-info">Add</button>
+        </div>
+    </form>
+    </div>
+</div>
+<hr>
+<br>
+    {% for todo in todo_list %}
+        <div class="cards" style="width: 32rem;">
+            <div class="card-body">
+                <p>{{ todo.id }} | {{ todo.title }}</p>
+                <div class="content">
+                {% if todo.complete == False %}
+                    <span class="badge bg-secondary">Not Completed</span>
+                {% else %}
+                    <span class="badge bg-success">Completed</span>
+                {% endif %}
+                <a href="/update/{{ todo.id }}" class="btn btn-primary">Update</a>
+                <a href="/delete/{{ todo.id }}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+                        
+{% endblock %}
